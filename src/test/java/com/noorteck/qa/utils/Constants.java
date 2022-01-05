@@ -8,21 +8,21 @@ import com.noorteck.qa.pages.SignInPage;
 import com.noorteck.qa.pages.SignUpPage;
 
 /**
- * In this class we declare our objects that will be shared among different classes
+ * In this class we declare our objects that will be shared among different
+ * classes
+ * 
  * @author NoorTeck
  *
  */
 public class Constants {
-	
-	Addresses addressesObj;
-	HomePage homePageObj;
-	SignInPage signInPageObj;
-	SignUpPage signUpPageObj;
-	
-	
-	
-	public WebDriver driver;
-	
-	//declare class objects and common objects
+
+	public static Addresses addressesObj;
+	public static HomePage homePageObj;
+	public static SignInPage signInPageObj;
+	public static SignUpPage signUpPageObj;
+
+	public static WebDriver driver;
+
+	// declare class objects and common objects
 
 }

@@ -19,6 +19,8 @@ public class HomePage extends CommonUI {
 
 	@FindBy(xpath = "//h1[text()='Welcome to Address Book']")
 	WebElement addressBookTitle;
+	
+	
 
 	public HomePage() {
 		PageFactory.initElements(driver, this);

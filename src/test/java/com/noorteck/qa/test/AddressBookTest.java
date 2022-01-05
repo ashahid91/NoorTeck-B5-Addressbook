@@ -1,5 +1,7 @@
 package com.noorteck.qa.test;
 
+import org.testng.asserts.SoftAssert;
+
 import com.noorteck.qa.pages.Addresses;
 import com.noorteck.qa.pages.HomePage;
 import com.noorteck.qa.pages.SignInPage;
@@ -8,58 +10,54 @@ import com.noorteck.qa.utils.CommonUI;
 import com.noorteck.qa.utils.ObjInitialize;
 
 public class AddressBookTest extends ObjInitialize {
-	
+
 	public static void main(String[] args) {
-		String url= "http://a.testaddressbook.com/sign_up";
-		
-		CommonUI com= new CommonUI();
-		com.openBrowser("chrome");
+		String url = "http://a.testaddressbook.com/sign_up";
+
+		CommonUI.openBrowser("chrome");
 		AddressBookTest testObj = new AddressBookTest();
-		
+
 		testObj.initializeClassObj();
-		com.navigate(url);
-		testObj.testCaseOne();
-		com.quitBrowser();
-		url= "http://a.testaddressbook.com/sign_in";
-		com.openBrowser("chrome");
-		com.navigate(url);
+//		CommonUI.navigate(url);
+//		testObj.testCaseOne();
+//		CommonUI.quitBrowser();
+		url = "http://a.testaddressbook.com/sign_in";
+		CommonUI.openBrowser("chrome");
+		CommonUI.navigate(url);
 		testObj.testCaseTwo();
-		
-		com.quitBrowser();
-		
+
+		CommonUI.quitBrowser();
+
 	}
-	
+
 	public void testCaseOne() {
 		SignUpPage signUpPageObj = new SignUpPage();
-		signUpPageObj.enterEmail("chicken.biryani@gmail.com");
+		signUpPageObj.enterEmail("chicken.biryani1@gmail.com");
 		signUpPageObj.enterPassword("aloobukhara");
 		signUpPageObj.clickSignUp();
 		HomePage homePageObj = new HomePage();
-		String welcomeMessage =homePageObj.welcomeTitke();
-		
-		if(welcomeMessage.contains("Welcome to Address Book")) {
-			System.out.println("Test case passed");
-		} else {
-			System.out.println("Test case failed");
-		}
+		String welcomeMessage = homePageObj.welcomeTitke();
+		String expectedMessage = "Welcome to Address Book";
+		SoftAssert softAssert = new SoftAssert();
+		softAssert.assertEquals(welcomeMessage, expectedMessage);
 	}
-	
+
 	public void testCaseTwo() {
-		
-		SignInPage signInObj= new SignInPage();
-		
+
+		SignInPage signInObj = new SignInPage();
+
 		signInObj.enterEmail("chicken.biryani@gmail.com");
 		signInObj.enterPassword("aloobukhara");
 		signInObj.clickSignIn();
-		
+
 		HomePage homePageObj = new HomePage();
-		
+
 		homePageObj.clickAddresses();
-		
+
 		Addresses addressesObj = new Addresses();
-		
+
 		addressesObj.clickNewAddress();
-		
+
 		addressesObj.enterFirstName("Elon");
 		addressesObj.enterLastName("Musk");
 		addressesObj.enterAddress1("123 main street");
@@ -72,16 +70,22 @@ public class AddressBookTest extends ObjInitialize {
 		addressesObj.enterNote("AUtomation is Fun");
 		addressesObj.clickCreateAddresses();
 		addressesObj.clickListButton();
+		SoftAssert softAssert = new SoftAssert();
+		String expectedFirstName= "Elon";
+		String expectedLasTName= "Musk";
+		String expectedCity= "Reston";
+		String expectedState= "Virgina";
+		String actualFirstName= addressesObj.getFirstNameData();
+		String actualLastName= addressesObj.getLastNameData();
+		String actualCity= addressesObj.getCityData();
+		String actualState= addressesObj.getStateData();
 		
-		
-		
-		
-		
-		
-		
-		
+		softAssert.assertEquals(expectedFirstName, actualFirstName);
+		softAssert.assertEquals(expectedLasTName,actualLastName);
+		softAssert.assertEquals(expectedCity,actualCity);
+		softAssert.assertEquals(expectedState,actualState);
+		softAssert.assertAll();
 	}
-	
 
 }
 

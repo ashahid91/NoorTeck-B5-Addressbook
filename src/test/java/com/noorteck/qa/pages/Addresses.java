@@ -63,6 +63,19 @@ public class Addresses extends CommonUI {
 	@FindBy(xpath="//*[@data-test='list']")
 	WebElement listButton;
 	
+	@FindBy(css="tbody tr td:nth-child(2)")
+	WebElement firstNameData;
+	
+	@FindBy(css="tbody tr td:nth-child(2)")
+	WebElement lastNameData;
+	
+	@FindBy (css="tbody tr td:nth-child(2)")
+	WebElement cityData;
+	
+	@FindBy (css="tbody tr td:nth-child(2)")
+	WebElement statData;
+	
+	
 	public Addresses() {
 		PageFactory.initElements(driver, this);
 	}
@@ -139,6 +152,22 @@ public class Addresses extends CommonUI {
 	
 	public void clickListButton() {
 		click(listButton);
+	}
+	
+	public String getFirstNameData() {
+		return getText(firstNameData);
+	}
+	
+	public String getLastNameData() {
+		return getText(lastNameData);
+	}
+	
+	public String getCityData() {
+		return getText(cityData);
+	}
+	
+	public String getStateData() {
+		return getText(statData);
 	}
 	
 	
